@@ -23,7 +23,16 @@ public class RecursionLab
   */
  
   public String countToBy(int countTo, int by) {
-    return null;
+      int n = countTo;
+      String output = "Count to " + n + " by " + by + "s: ";
+      if(n <= by) {
+          output += "" + n;
+      }
+      else {
+          output = countToBy(countTo - by, by) + ", " + countTo;
+
+      }
+      return output;
   }
  
  /**
@@ -32,13 +41,23 @@ public class RecursionLab
   * the part of the array that begins at the given index. 
   * In this way, a recursive call can pass index+1 to move down the array. 
   * The initial call will pass in index as 0.
-  array11(11, 4, 6], 0) -> 1
+  array11([11, 4, 6], 0) -> 1
   array11([11, 11], 0) -> 2
   array11([1, 2, 3, 4], 0) -> 0
   */
  
   public int array11(int[] chars, int index) {
-    return 0;    
+      int times = 0;
+      if(index == chars.length) {
+          return 0;
+      }
+      else {
+          if(chars[index] == 11) {
+              times++;
+          }
+          times += array11(chars, index+1);
+      }
+      return times;
   }
  
  /**
@@ -58,6 +77,14 @@ public class RecursionLab
   */
  
   public String zigzag(int n) {
+      /*StringBuilder output = new StringBuilder();
+      if(n <= 2) {
+          output.append("*".repeat(n));
+      }
+      else {
+          zigzag(n-1)
+      }*/
+
     return null;
   }
   
