@@ -23,13 +23,18 @@ public class RecursionLab
   */
  
   public String countToBy(int countTo, int by) {
-      int n = countTo;
-      String output = "Count to " + n + " by " + by + "s: ";
-      if(n <= by) {
-          output += "" + n;
+      String output = "Count to " + countTo + " by " + by + "s: ";
+      output += countToByDisplay(countTo, countTo, by);
+      return output;
+  }
+
+  public String countToByDisplay(int to, int countTo, int by) {
+      String output = "";
+      if(countTo <= by) {
+          output += "" + countTo;
       }
       else {
-          output = countToBy(countTo - by, by) + ", " + countTo;
+          output = countToByDisplay(countTo, countTo - by, by) + ", " + countTo;
 
       }
       return output;
@@ -77,15 +82,17 @@ public class RecursionLab
   */
  
   public String zigzag(int n) {
-      /*StringBuilder output = new StringBuilder();
+      String output = "";
       if(n <= 2) {
-          output.append("*".repeat(n));
+          output = "*".repeat(n);
       }
       else {
-          zigzag(n-1)
-      }*/
+          output = "<";
+          output += zigzag(n-2);
+          output += ">";
+      }
 
-    return null;
+    return output;
   }
   
  
@@ -108,7 +115,17 @@ public class RecursionLab
   *  at index 2 do not match.
   */
   public int nonMatching(String s1, String s2) {
-    return 0;
+      int times = 0;
+      if(s1.length() == 0 || s2.length() == 0) {
+          return 0;
+      }
+      else {
+          if(s1.charAt(0) == s2.charAt(0)) {
+              times++;
+          }
+          times += nonMatching(s1.substring(1, s1.length()), s2.substring(1, s2.length()));
+      }
+      return times;
   }
 
   /**
@@ -118,8 +135,22 @@ public class RecursionLab
   * return 0.
   * For example, the call of evenNumeros(8342116) should return 8426 
   * and the call of evenNumeros(35179) should return 0.*/
- 
-  public int evenNumeros(int n) {
-    return 0;
+
+  public static int evenNumeros(int n) {
+      int num = n;
+      if(num < 10) {
+          if(num%2 == 0)
+              return num;
+          else
+              return 0;
+      }
+      else {
+          if(num%2 == 0) {
+              num = evenNumeros(num/10)*10 + num%10;
+          }
+          else
+              num = evenNumeros(num/10);
+      }
+      return num;
   }
 } 
